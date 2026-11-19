@@ -1,0 +1,15 @@
+[project]
+name = "fullstack-study-group-scheduler"
+version = "1.0.0"
+description = "Find a time when your study group can actually meet"
+requires-python = ">=3.11"
+dependencies = ["flask>=3.0"]
+license = { text = "MIT" }
+authors = [{ name = "Ahmad Kaiss" }]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "playwright>=1.40"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["browser: end-to-end tests in a real browser (needs Playwright + Chromium)"]
