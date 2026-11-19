@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study group scheduler</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <main class="narrow">
+    <h1>Study group scheduler</h1>
+    <p class="lead">Everyone marks when they're free during the week. The scheduler finds the times that work for the most people.</p>
+    <form id="create" class="card">
+      <label for="group-name">Group name</label>
+      <div class="row">
+        <input id="group-name" name="name" maxlength="40" required placeholder="e.g. Data Structures exam prep" autocomplete="off">
+        <button type="submit">Create group</button>
+      </div>
+      <p id="create-error" class="error" role="alert"></p>
+    </form>
+    <ol class="steps">
+      <li>Create a group and share its link with your classmates.</li>
+      <li>Each person joins with their name and paints the times they're free.</li>
+      <li>Pick a meeting length; the best common times appear, best first.</li>
+    </ol>
+  </main>
+  <script type="module" src="/static/home.js"></script>
+</body>
+</html>

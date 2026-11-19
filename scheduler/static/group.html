@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study group</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <main>
+    <header class="top">
+      <div>
+        <a href="/" class="back">Study group scheduler</a>
+        <h1 id="group-name">Loading…</h1>
+      </div>
+      <div class="share">
+        <span>Share this link:</span>
+        <input id="share-link" readonly aria-label="Share link">
+        <button id="copy-link" type="button" class="secondary">Copy</button>
+      </div>
+    </header>
+    <p id="load-error" class="error" role="alert"></p>
+
+    <div class="layout" id="app" hidden>
+      <section class="grid-panel">
+        <div class="toolbar">
+          <div id="identity"></div>
+          <div class="modes" role="group" aria-label="View">
+            <button type="button" id="mode-edit" class="secondary" aria-pressed="false">My times</button>
+            <button type="button" id="mode-heat" class="secondary" aria-pressed="true">Everyone</button>
+          </div>
+        </div>
+        <form id="join" class="join" hidden>
+          <label for="member-name">Join this group as</label>
+          <input id="member-name" maxlength="40" required placeholder="Your name" autocomplete="off">
+          <button type="submit">Join</button>
+          <span id="join-error" class="error" role="alert"></span>
+        </form>
+        <p id="hint" class="hint"></p>
+        <div class="grid-wrap">
+          <table id="grid" class="grid" aria-describedby="hint"></table>
+        </div>
+        <div class="save-bar" id="save-bar" hidden>
+          <button type="button" id="save">Save my times</button>
+          <button type="button" id="clear" class="secondary">Clear all</button>
+          <span id="save-status" role="status"></span>
+        </div>
+      </section>
+
+      <aside class="side">
+        <section class="card">
+          <h2>Best times</h2>
+          <form id="find" class="find">
+            <label>Meeting length
+              <select id="duration"></select>
+            </label>
+            <label>At least
+              <input id="quorum" type="number" min="1" value="1"> people
+            </label>
+            <fieldset id="required-box">
+              <legend>Must attend</legend>
+              <div id="required"></div>
+            </fieldset>
+          </form>
+          <ol id="results" class="results" aria-live="polite"></ol>
+        </section>
+        <section class="card">
+          <h2>Members <span id="member-count" class="muted"></span></h2>
+          <ul id="members" class="members"></ul>
+          <button type="button" id="leave" class="link" hidden>Leave this group</button>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <script type="module" src="/static/group.js"></script>
+</body>
+</html>
