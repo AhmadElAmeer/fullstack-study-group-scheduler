@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: python -m pip install flask pytest
+      - name: Planner and API tests
+        run: python -m pytest -q -m "not browser"
+
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies and Chromium
+        run: |
+          python -m pip install flask pytest playwright
+          python -m playwright install --with-deps chromium
+      - name: Browser tests
+        run: python -m pytest -q -m browser
+      - name: Benchmark still runs
+        run: python scripts/bench.py
